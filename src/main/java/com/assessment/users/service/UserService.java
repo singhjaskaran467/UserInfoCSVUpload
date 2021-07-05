@@ -9,7 +9,10 @@ import com.assessment.users.model.UserInfo;
 public interface UserService {
 
   public List<UserInfo> getAllUsers();
+
   public Optional<UserInfo> getById(String id);
+
   public Optional<UserInfo> getByEmail(String email);
+
   public void save(MultipartFile file);
 }

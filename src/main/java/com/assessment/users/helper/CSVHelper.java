@@ -17,47 +17,47 @@ import com.assessment.users.model.UserInfo;
 public class CSVHelper {
 
   public static String TYPE = "text/csv";
-  
+
   public static boolean isCSVFormat(MultipartFile file) {
-    if(!TYPE.equals(file.getContentType())) {
+    if (!TYPE.equals(file.getContentType())) {
       return false;
     }
     return true;
   }
-  
-  public static List<UserInfo> csvUserInfoToList(InputStream is) {
-    try(BufferedReader fileReader = new BufferedReader(new InputStreamReader(is , "UTF-8"));
-          CSVParser csvParser = new CSVParser(fileReader, 
-                CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
-                  
-                  List<UserInfo> users = new ArrayList<UserInfo>();
-                  
-                  Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
-                  for(CSVRecord csvRecord : csvRecords) {
-                      if(csvRecord.size() == 4) {
-                        UserInfo user = new UserInfo(
-                              csvRecord.get("Identifier"),
-                              csvRecord.get("Login email"),
-                              csvRecord.get("First name"),
-                              csvRecord.get("Last name"));
-                         users.add(user);
-                      } else {
-                        UserInfo user = new UserInfo(
-                              csvRecord.get("Identifier"),
-                              csvRecord.get("Username"),
-                              csvRecord.get("First name"),
-                              csvRecord.get("Last name"),
-                              csvRecord.get("Department"),
-                              csvRecord.get("Location"),
-                              BCrypt.hashpw(csvRecord.get("One-time password"), BCrypt.gensalt()),
-                              BCrypt.hashpw(csvRecord.get("Recovery code"), BCrypt.gensalt()));
-                        users.add(user);
-                      }
-                    }
-                  return users;
-                } catch(Exception e) {
-                  throw new RuntimeException(e.getMessage());
-                }
+  public static List<UserInfo> csvUserInfoToList(InputStream is) {
+    try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+          CSVParser csvParser = new CSVParser(fileReader,
+                CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
+
+      List<UserInfo> users = new ArrayList<UserInfo>();
+
+      Iterable<CSVRecord> csvRecords = csvParser.getRecords();
+
+      for (CSVRecord csvRecord : csvRecords) {
+        if (csvRecord.size() == 4) {
+          UserInfo user = new UserInfo(
+                csvRecord.get("Identifier"),
+                csvRecord.get("Login email"),
+                csvRecord.get("First name"),
+                csvRecord.get("Last name"));
+          users.add(user);
+        } else {
+          UserInfo user = new UserInfo(
+                csvRecord.get("Identifier"),
+                csvRecord.get("Username"),
+                csvRecord.get("First name"),
+                csvRecord.get("Last name"),
+                csvRecord.get("Department"),
+                csvRecord.get("Location"),
+                BCrypt.hashpw(csvRecord.get("One-time password"), BCrypt.gensalt()),
+                BCrypt.hashpw(csvRecord.get("Recovery code"), BCrypt.gensalt()));
+          users.add(user);
+        }
+      }
+      return users;
+    } catch (Exception e) {
+      throw new RuntimeException(e.getMessage());
+    }
   }
 }

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Document(collection = "users")
 public class UserInfo {
-  
+
   @Id
   private String id;
   private String email;
@@ -21,11 +21,12 @@ public class UserInfo {
   @JsonProperty(access = Access.WRITE_ONLY)
   private String oneTimePassword;
   private String recoveryCode;
-  
+
   public UserInfo() {
   }
-  
-  public UserInfo(String id, String username, String firstName, String lastName, String department, String location, String oneTimePassword, String recoveryCode, String email) {
+
+  public UserInfo(String id, String username, String firstName, String lastName, String department, String location,
+        String oneTimePassword, String recoveryCode, String email) {
     this.id = id;
     this.username = username;
     this.firstName = firstName;
@@ -36,8 +37,9 @@ public class UserInfo {
     this.recoveryCode = recoveryCode;
     this.email = email;
   }
-  
-  public UserInfo(String id, String username, String firstName, String lastName, String department, String location, String oneTimePassword, String recoveryCode) {
+
+  public UserInfo(String id, String username, String firstName, String lastName, String department, String location,
+        String oneTimePassword, String recoveryCode) {
     this.id = id;
     this.username = username;
     this.firstName = firstName;
@@ -54,7 +56,7 @@ public class UserInfo {
     this.firstName = firstName;
     this.lastName = lastName;
   }
-  
+
   public String getOneTimePassword() {
     return oneTimePassword;
   }
