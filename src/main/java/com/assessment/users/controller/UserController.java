@@ -44,7 +44,6 @@ public class UserController {
   public ResponseEntity<Optional<UserInfo>> getUserInfo(@RequestParam(required = false, name = "id") String id,
         @RequestParam(required = false, name = "email") String email) {
     if (id != null) {
-      System.out.println("1" + id);
       return ResponseEntity.status(HttpStatus.OK).body(userService.getById(id));
     } else if (email != null) {
       return ResponseEntity.status(HttpStatus.OK).body(userService.getByEmail(email));
